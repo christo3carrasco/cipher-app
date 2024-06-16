@@ -1,0 +1,109 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="toolbar-title">Cipher Choice</span>
+</mat-toolbar>
+
+<div class="sign-up-container">
+  <mat-card class="sign-up-card">
+    <mat-card-title class="sign-up-title">Crear Cuenta</mat-card-title>
+    <mat-card-content>
+      <form
+        [formGroup]="signUpForm"
+        (ngSubmit)="onSubmit()"
+        class="sign-up-form"
+      >
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput formControlName="name" required />
+          <mat-error
+            *ngIf="
+              signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched
+            "
+          >
+            El nombre es obligatorio.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Correo Electrónico</mat-label>
+          <input matInput formControlName="email" type="email" required />
+          <mat-error
+            *ngIf="
+              signUpForm.get('email')?.invalid &&
+              signUpForm.get('email')?.touched
+            "
+          >
+            Por favor ingrese un correo electrónico válido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" type="password" required />
+          <mat-error
+            *ngIf="
+              signUpForm.get('password')?.invalid &&
+              signUpForm.get('password')?.touched
+            "
+          >
+            La contraseña debe tener al menos 6 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="phone" required />
+          <mat-error
+            *ngIf="
+              signUpForm.get('phone')?.invalid &&
+              signUpForm.get('phone')?.touched
+            "
+          >
+            El teléfono debe tener 9 dígitos.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateOfBirth"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker
+            startView="multi-year"
+            startAt="2001-09-11"
+          ></mat-datepicker>
+          <mat-error
+            *ngIf="
+              signUpForm.get('dateOfBirth')?.invalid &&
+              signUpForm.get('dateOfBirth')?.touched
+            "
+          >
+            La fecha de nacimiento es obligatoria.
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="full-width"
+        >
+          Registrarse
+        </button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="sign-up-actions">
+      <span>¿Ya tienes una cuenta? </span>
+      <button mat-button routerLink="/sign-in" color="accent">
+        Iniciar sesión
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
