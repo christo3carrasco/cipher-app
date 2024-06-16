@@ -3,5 +3,5 @@ export interface SignUpData {
   email: string;
   password: string;
   phone: string;
-  dateOfBirth: Date;
+  dateOfBirth: Date | string;
 }
