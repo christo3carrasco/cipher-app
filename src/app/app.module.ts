@@ -13,6 +13,7 @@ import { authHeaderInterceptor } from './services/interceptor/auth-header.interc
 import { UserSignInComponent } from './components/user-module/user-sign-in/user-sign-in.component';
 import { UserSignUpComponent } from './components/user-module/user-sign-up/user-sign-up.component';
 import { UserNotFoundComponent } from './components/user-module/user-not-found/user-not-found.component';
+import { VoterComponent } from './components/voter-module/voter/voter.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UserNotFoundComponent } from './components/user-module/user-not-found/u
     UserSignInComponent,
     UserSignUpComponent,
     UserNotFoundComponent,
+    VoterComponent,
   ],
   imports: [
     BrowserModule,
