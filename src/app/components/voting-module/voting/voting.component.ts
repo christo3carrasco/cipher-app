@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { format, toZonedTime } from 'date-fns-tz';
+import { format } from 'date-fns-tz';
 import { es } from 'date-fns/locale';
 
 import { VotingApiService } from '../../../services/voting/voting-api.service';
@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { VotingFormComponent } from '../voting-form/voting-form.component';
 import { VotingDetailsComponent } from '../voting-details/voting-details.component';
 import { OptionListComponent } from '../../option-module/option-list/option-list.component';
+import { ParticipantListComponent } from '../../participant-module/participant-list/participant-list.component';
 
 @Component({
   selector: 'app-voting',
@@ -116,6 +117,13 @@ export class VotingComponent implements OnInit {
   openOptionListDialog(voting: Voting): void {
     this.dialog.open(OptionListComponent, {
       width: '400px',
+      data: { votingId: voting._id, isStarted: voting.isStarted },
+    });
+  }
+
+  openParticipantListDialog(voting: Voting): void {
+    this.dialog.open(ParticipantListComponent, {
+      width: '500px',
       data: { votingId: voting._id, isStarted: voting.isStarted },
     });
   }

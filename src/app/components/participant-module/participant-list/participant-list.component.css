@@ -1,0 +1,28 @@
+.full-width {
+  width: 100%;
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-list-item {
+  margin: 8px 0;
+}
+
+.info-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.registered-participants-title {
+  font-size: 1.5em; /* Tamaño de fuente más grande */
+  font-weight: bold; /* Texto en negrita */
+  color: #d32f2f; /* Color rojo oscuro */
+  text-align: center; /* Alineación centrada */
+  margin-top: 20px; /* Margen superior */
+  margin-bottom: 10px; /* Margen inferior */
+  border-bottom: 2px solid #d32f2f; /* Línea inferior */
+  padding-bottom: 10px; /* Espaciado inferior */
+}

@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>Participantes de Votación</h1>
+<div mat-dialog-content>
+  <form [formGroup]="participantForm" (ngSubmit)="onSearchUser()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="participantForm.get('email')?.hasError('required')"
+        >El email es requerido</mat-error
+      >
+      <mat-error *ngIf="participantForm.get('email')?.hasError('email')"
+        >El email no es válido</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="participantForm.invalid || isStarted"
+    >
+      Buscar
+    </button>
+  </form>
+
+  <div *ngIf="foundUsers.length > 0">
+    <mat-list>
+      <mat-list-item *ngFor="let user of foundUsers">
+        {{ user.name }} ({{ user.email }})
+        <button
+          mat-button
+          color="primary"
+          (click)="onAddParticipant(user)"
+          [disabled]="isStarted"
+        >
+          Agregar
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div *ngIf="participants.length > 0">
+    <h3 class="registered-participants-title">Participantes Registrados</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let participant of participants">
+        {{ participant.user.email }}
+        <button
+          mat-button
+          color="warn"
+          (click)="onDeleteParticipant(participant.voterId)"
+        >
+          Eliminar
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div *ngIf="isStarted" class="info-message">
+    No se pueden agregar más participantes porque la votación ha comenzado.
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cerrar</button>
+</div>

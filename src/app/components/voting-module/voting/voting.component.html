@@ -157,6 +157,13 @@
               >
                 Listas
               </button>
+              <button
+                mat-button
+                *ngIf="voting.isApproved"
+                (click)="openParticipantListDialog(voting)"
+              >
+                Participantes
+              </button>
             </td>
           </ng-container>
 
