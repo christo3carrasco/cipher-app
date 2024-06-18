@@ -1,0 +1,65 @@
+<h1 mat-dialog-title>Nueva Votación</h1>
+<div mat-dialog-content>
+  <form [formGroup]="votingForm" (ngSubmit)="onSubmit()" class="voting-form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Fecha de Inicio</mat-label>
+      <input
+        matInput
+        [matDatepicker]="startDatePicker"
+        formControlName="startDate"
+        [min]="minStartDate"
+        required
+        (dateChange)="onStartDateChange($event)"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="startDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+      <mat-error *ngIf="votingForm.get('startDate')?.hasError('min')">
+        La fecha de inicio no puede ser anterior a la fecha actual.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Fecha de Fin</mat-label>
+      <input
+        matInput
+        [matDatepicker]="endDatePicker"
+        formControlName="endDate"
+        [min]="minEndDate"
+        required
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="endDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+      <mat-error *ngIf="votingForm.get('endDate')?.hasError('min')">
+        La fecha de fin no puede ser anterior a la fecha de inicio.
+      </mat-error>
+    </mat-form-field>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+      <button
+        mat-button
+        color="primary"
+        type="submit"
+        [disabled]="votingForm.invalid"
+      >
+        Crear
+      </button>
+    </div>
+  </form>
+</div>

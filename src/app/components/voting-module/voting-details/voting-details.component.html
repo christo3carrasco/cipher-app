@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Detalles de la Votación</h1>
+<div mat-dialog-content>
+  <p><strong>Título:</strong> {{ data.title }}</p>
+  <p><strong>Descripción:</strong> {{ data.description }}</p>
+  <p>
+    <strong>Fecha de Inicio:</strong> {{ data.startDate | date : "longDate" }}
+  </p>
+  <p><strong>Fecha de Fin:</strong> {{ data.endDate | date : "longDate" }}</p>
+  <p><strong>Estado:</strong> {{ getStatus() }}</p>
+  <p><strong>Dirección del Contrato:</strong> {{ data.contractAddress }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cerrar</button>
+</div>

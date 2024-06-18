@@ -1,0 +1,174 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav" mode="over">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/voter"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Votante</a
+      >
+      <a
+        mat-list-item
+        routerLink="/voting"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Votaciones</a
+      >
+      <a
+        mat-list-item
+        routerLink="/profile"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Perfil</a
+      >
+      <button mat-list-item (click)="logout(); sidenav.close()">
+        Cerrar Sesión
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="app-toolbar">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-title">Cipher Choice</span>
+      <span class="spacer"></span>
+      <ng-container *ngIf="!(isHandset$ | async)">
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/voter"
+          routerLinkActive="active-button"
+          >Votante</a
+        >
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/voting"
+          routerLinkActive="active-button"
+          >Votaciones</a
+        >
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/profile"
+          routerLinkActive="active-button"
+          >Perfil</a
+        >
+        <button mat-button class="toolbar-button" (click)="logout()">
+          Cerrar Sesión
+        </button>
+      </ng-container>
+    </mat-toolbar>
+
+    <div class="voting-container">
+      <h1 class="page-title">Mis votaciones</h1>
+      <div class="actions-container">
+        <button
+          mat-raised-button
+          color="primary"
+          class="new-button"
+          (click)="openNewVotingDialog()"
+        >
+          Nuevo
+        </button>
+        <mat-form-field class="filter">
+          <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" />
+        </mat-form-field>
+      </div>
+
+      <div class="legend-container">
+        <div class="legend-item">
+          <span class="status-circle status-default"></span> Espera de
+          aprobación
+        </div>
+        <div class="legend-item">
+          <span class="status-circle status-approved"></span> Aprobado
+        </div>
+        <div class="legend-item">
+          <span class="status-circle status-started"></span> Iniciado
+        </div>
+        <div class="legend-item">
+          <span class="status-circle status-finished"></span> Finalizado
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          class="mat-elevation-z8"
+        >
+          <!-- Title Column -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
+            <td mat-cell *matCellDef="let voting">{{ voting.title }}</td>
+          </ng-container>
+
+          <!-- Start Date Column -->
+          <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Fecha de Inicio
+            </th>
+            <td mat-cell *matCellDef="let voting">
+              {{ formatDateToLocale(voting.startDate) }}
+            </td>
+          </ng-container>
+
+          <!-- End Date Column -->
+          <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Fecha de Fin
+            </th>
+            <td mat-cell *matCellDef="let voting">
+              {{ formatDateToLocale(voting.endDate) }}
+            </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let voting">
+              <span
+                class="status-circle"
+                [ngClass]="getStatusClass(voting)"
+              ></span>
+            </td>
+          </ng-container>
+
+          <!-- Options Column -->
+          <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef>Opciones</th>
+            <td mat-cell *matCellDef="let voting">
+              <button mat-button (click)="openVotingDetailsDialog(voting)">
+                Ver
+              </button>
+              <button
+                mat-button
+                *ngIf="voting.isApproved"
+                (click)="openOptionListDialog(voting)"
+              >
+                Listas
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

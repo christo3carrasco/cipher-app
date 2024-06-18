@@ -1,0 +1,23 @@
+.voting-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-form-field {
+  margin-bottom: 16px;
+}
+
+.mat-dialog-content {
+  overflow: hidden; /* Eliminar scrollbar */
+  padding-bottom: 0; /* Ajustar padding */
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
