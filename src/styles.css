@@ -7,4 +7,18 @@ body {
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   margin: 0;
+  background-color: #ffe4e1;
+}
+
+.mat-dialog-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.mat-dialog-content {
+  padding: 24px;
+}
+
+.mat-dialog-actions {
+  padding: 8px 24px;
 }
