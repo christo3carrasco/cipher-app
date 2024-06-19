@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Listas de Votación</h1>
+<div mat-dialog-content>
+  <form [formGroup]="optionForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nombre de la Lista</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="optionForm.get('name')?.hasError('required')"
+        >El nombre es requerido</mat-error
+      >
+      <mat-error *ngIf="optionForm.get('name')?.hasError('nameExists')"
+        >El nombre ya existe</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="optionForm.invalid || isStarted"
+    >
+      Agregar
+    </button>
+  </form>
+
+  <div *ngIf="isStarted" class="info-message">
+    No se pueden agregar nuevas listas porque la votación ha comenzado.
+  </div>
+
+  <mat-list>
+    <mat-list-item *ngFor="let option of options">
+      {{ option.name }} ({{ option.voteCount }} votos)
+    </mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cerrar</button>
+</div>

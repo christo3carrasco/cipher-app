@@ -1,0 +1,12 @@
+.full-width {
+  width: 100%;
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-list-item {
+  margin: 8px 0;
+}
