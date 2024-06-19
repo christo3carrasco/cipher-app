@@ -141,6 +141,14 @@
               <button mat-button (click)="openVotingDetailsDialog(voting)">
                 Ver
               </button>
+              <button
+                mat-button
+                color="accent"
+                *ngIf="voting.isStarted && !voting.isFinished"
+                (click)="vote(voting)"
+              >
+                Votar
+              </button>
             </td>
           </ng-container>
 

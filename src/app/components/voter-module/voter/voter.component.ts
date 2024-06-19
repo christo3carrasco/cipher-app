@@ -12,6 +12,7 @@ import { VoterApiService } from '../../../services/voter/voter-api.service';
 import { VotingApiService } from '../../../services/voting/voting-api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { VotingDetailsComponent } from '../../voting-module/voting-details/voting-details.component';
+import { VoteComponent } from '../../vote-module/vote/vote.component';
 
 @Component({
   selector: 'app-voter',
@@ -87,6 +88,16 @@ export class VoterComponent implements OnInit {
       width: '400px',
       data: voting,
     });
+  }
+
+  vote(voting: Voting): void {
+    const voter = this.voters.find((v) => v.votingProcess === voting._id);
+    if (voter) {
+      this.dialog.open(VoteComponent, {
+        width: '400px',
+        data: { votingId: voting._id, voterId: voter._id },
+      });
+    }
   }
 
   getStatusLabel(voting: Voting): string {
