@@ -92,6 +92,13 @@ export class ParticipantListComponent implements OnInit {
   }
 
   onDeleteParticipant(voterId: string): void {
+    if (this.isStarted) {
+      alert(
+        'No se puede eliminar participantes una vez que la votación ha comenzado.'
+      );
+      return;
+    }
+
     this.voterApiService.deleteVoter(voterId).subscribe(
       () => {
         this.participants = this.participants.filter(

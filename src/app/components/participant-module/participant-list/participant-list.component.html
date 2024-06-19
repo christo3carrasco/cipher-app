@@ -46,6 +46,7 @@
           mat-button
           color="warn"
           (click)="onDeleteParticipant(participant.voterId)"
+          [disabled]="isStarted"
         >
           Eliminar
         </button>
