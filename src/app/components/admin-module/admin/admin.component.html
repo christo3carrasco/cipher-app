@@ -1,0 +1,173 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav" mode="over">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/admin"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Administración
+      </a>
+      <button mat-list-item (click)="logout(); sidenav.close()">
+        Cerrar Sesión
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="app-toolbar">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-title">Cipher Choice</span>
+      <span class="spacer"></span>
+      <ng-container *ngIf="!(isHandset$ | async)">
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/admin"
+          routerLinkActive="active-button"
+          >Administración
+        </a>
+        <button mat-button class="toolbar-button" (click)="logout()">
+          Cerrar Sesión
+        </button>
+      </ng-container>
+    </mat-toolbar>
+
+    <div class="voting-container">
+      <h1 class="page-title">Votaciones</h1>
+      <div class="actions-container">
+        <mat-form-field class="filter">
+          <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" />
+        </mat-form-field>
+      </div>
+
+      <div class="legend-container">
+        <div class="legend-item">
+          <span class="status-circle status-default"></span> Espera de
+          aprobación
+        </div>
+        <div class="legend-item">
+          <span class="status-circle status-approved"></span> Aprobado
+        </div>
+        <div class="legend-item">
+          <span class="status-circle status-started"></span> Iniciado
+        </div>
+        <div class="legend-item">
+          <span class="status-circle status-finished"></span> Finalizado
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
+            <td mat-cell *matCellDef="let voting">{{ voting.title }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Descripción
+            </th>
+            <td mat-cell *matCellDef="let voting">{{ voting.description }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Fecha de Inicio
+            </th>
+            <td mat-cell *matCellDef="let voting">
+              {{ formatDateToLocale(voting.startDate) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Fecha de Fin
+            </th>
+            <td mat-cell *matCellDef="let voting">
+              {{ formatDateToLocale(voting.endDate) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="contractAddress">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Dirección Contrato
+            </th>
+            <td mat-cell *matCellDef="let voting">
+              {{ voting.contractAddress }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="organizer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Organizador
+            </th>
+            <td mat-cell *matCellDef="let voting">{{ voting.organizer }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let voting">
+              <span
+                class="status-circle"
+                [ngClass]="getStatusClass(voting)"
+              ></span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef>Opciones</th>
+            <td mat-cell *matCellDef="let voting">
+              <button
+                mat-button
+                *ngIf="
+                  !voting.isApproved && !voting.isStarted && !voting.isFinished
+                "
+                (click)="updateVotingStatus(voting, 'approve')"
+              >
+                Aprobar
+              </button>
+              <button
+                mat-button
+                *ngIf="
+                  voting.isApproved && !voting.isStarted && !voting.isFinished
+                "
+                (click)="updateVotingStatus(voting, 'start')"
+              >
+                Iniciar
+              </button>
+              <button
+                mat-button
+                *ngIf="
+                  voting.isApproved && voting.isStarted && !voting.isFinished
+                "
+                (click)="updateVotingStatus(voting, 'finish')"
+              >
+                Finalizar
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
