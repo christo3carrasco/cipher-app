@@ -1,0 +1,98 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav" mode="over">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/voter"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Votante</a
+      >
+      <a
+        mat-list-item
+        routerLink="/voting"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Votaciones</a
+      >
+      <a
+        mat-list-item
+        routerLink="/profile"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Perfil</a
+      >
+      <button mat-list-item (click)="logout(); sidenav.close()">
+        Cerrar Sesión
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="app-toolbar">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-title">Cipher Choice</span>
+      <span class="spacer"></span>
+      <ng-container *ngIf="!(isHandset$ | async)">
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/voter"
+          routerLinkActive="active-button"
+          >Votante</a
+        >
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/voting"
+          routerLinkActive="active-button"
+          >Votaciones</a
+        >
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/profile"
+          routerLinkActive="active-button"
+          >Perfil</a
+        >
+        <button mat-button class="toolbar-button" (click)="logout()">
+          Cerrar Sesión
+        </button>
+      </ng-container>
+    </mat-toolbar>
+
+    <div class="profile-container">
+      <h1 class="page-title">Mi Perfil</h1>
+      <div class="profile-details">
+        <div class="profile-item">
+          <span class="profile-label">UID:</span>
+          <span class="profile-value">{{ user.uid }}</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Nombre:</span>
+          <span class="profile-value">{{ user.name }}</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Email:</span>
+          <span class="profile-value">{{ user.email }}</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Teléfono:</span>
+          <span class="profile-value">{{ user.phone }}</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Fecha de Nacimiento:</span>
+          <span class="profile-value">{{
+            user.dateOfBirth | date : "longDate"
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
