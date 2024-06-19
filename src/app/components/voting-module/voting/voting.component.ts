@@ -18,6 +18,8 @@ import { VotingFormComponent } from '../voting-form/voting-form.component';
 import { VotingDetailsComponent } from '../voting-details/voting-details.component';
 import { OptionListComponent } from '../../option-module/option-list/option-list.component';
 import { ParticipantListComponent } from '../../participant-module/participant-list/participant-list.component';
+import { ResultsModalComponent } from '../../result-module/results-modal/results-modal.component';
+import { VotingData } from '../../../models/voting/voting-data';
 
 @Component({
   selector: 'app-voting',
@@ -126,6 +128,37 @@ export class VotingComponent implements OnInit {
       width: '500px',
       data: { votingId: voting._id, isStarted: voting.isStarted },
     });
+  }
+
+  openResultsDialog(voting: Voting): void {
+    this.dialog.open(ResultsModalComponent, {
+      width: '600px',
+      data: { votingId: voting._id },
+    });
+  }
+
+  updateVotingStatus(voting: Voting, status: string): void {
+    let message: string = ''; // Inicializar message con un valor vacío
+    let update: Partial<Voting> = {};
+
+    if (status === 'start') {
+      message = '¿Está seguro de que desea iniciar esta votación?';
+      update = { isStarted: true };
+    } else if (status === 'finish') {
+      message = '¿Está seguro de que desea finalizar esta votación?';
+      update = { isFinished: true };
+    }
+
+    if (message && confirm(message)) {
+      this.votingApiService.updateVoting(voting._id, update).subscribe(
+        () => {
+          this.loadVotings();
+        },
+        (error) => {
+          console.error('Error al actualizar el estado de la votación', error);
+        }
+      );
+    }
   }
 
   logout() {

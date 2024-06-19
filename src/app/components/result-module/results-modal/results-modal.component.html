@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Resultados de la Votación</h1>
+<div mat-dialog-content>
+  <div *ngIf="totalVoters > 0; else noResults">
+    <div class="results-header">Total de Votantes: {{ totalVoters }}</div>
+    <div *ngFor="let option of results | keyvalue">
+      <div class="option-header">{{ getOptionName(+option.key) }}</div>
+      <!-- Convert key to number -->
+      <div class="votes-info">
+        Votos: {{ option.value.count }} ({{
+          (option.value.count / totalVotes) * 100 | number : "1.0-2"
+        }}%)
+      </div>
+      <div class="voters-header">Votantes:</div>
+      <ul class="voters-list">
+        <li *ngFor="let userId of option.value.users">{{ userId }}</li>
+      </ul>
+    </div>
+    <ng-container *ngFor="let option of options">
+      <div *ngIf="!results[option.id]">
+        <div class="option-header">{{ option.name }}</div>
+        <div class="votes-info">Votos: 0 (0%)</div>
+        <div class="no-voters">No hubo votantes para esta opción.</div>
+      </div>
+    </ng-container>
+    <div class="results-header">Votantes que no votaron:</div>
+    <ul class="voters-list">
+      <li *ngFor="let userId of getVotersNotVoted()">{{ userId }}</li>
+    </ul>
+  </div>
+  <ng-template #noResults>
+    <p>No hay resultados disponibles.</p>
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cerrar</button>
+</div>

@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  padding: 16px;
+  max-width: 600px;
+}
+
+mat-dialog-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+mat-dialog-content {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.results-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.option-header {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.votes-info {
+  margin-bottom: 4px;
+}
+
+.voters-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.voters-list li {
+  margin-bottom: 4px;
+}
+
+.no-voters {
+  font-style: italic;
+  color: grey;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}

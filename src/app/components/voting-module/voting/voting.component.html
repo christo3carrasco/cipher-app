@@ -164,6 +164,27 @@
               >
                 Participantes
               </button>
+              <button
+                mat-button
+                *ngIf="voting.isApproved && !voting.isStarted"
+                (click)="updateVotingStatus(voting, 'start')"
+              >
+                Iniciar
+              </button>
+              <button
+                mat-button
+                *ngIf="voting.isStarted && !voting.isFinished"
+                (click)="updateVotingStatus(voting, 'finish')"
+              >
+                Finalizar
+              </button>
+              <button
+                mat-button
+                *ngIf="voting.isFinished"
+                (click)="openResultsDialog(voting)"
+              >
+                Resultados
+              </button>
             </td>
           </ng-container>
 
