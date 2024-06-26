@@ -10,6 +10,7 @@ import { ProfileComponent } from './components/user-module/profile/profile.compo
 import { adminGuard } from './services/guard/admin.guard';
 import { AdminComponent } from './components/admin-module/admin/admin.component';
 import { UserComponent } from './components/admin-module/user/user.component';
+import { TransparencyComponent } from './components/transparency-module/transparency/transparency.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'profile', canActivate: [userGuard], component: ProfileComponent },
   { path: 'admin', canActivate: [adminGuard], component: AdminComponent },
   { path: 'user', canActivate: [adminGuard], component: UserComponent },
+  { path: 'transparency', component: TransparencyComponent },
   { path: '**', component: UserNotFoundComponent },
 ];
 

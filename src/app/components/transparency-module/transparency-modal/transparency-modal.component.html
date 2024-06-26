@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Hash Blockchain</h1>
+<div mat-dialog-content>
+  <p *ngIf="loading">Cargando...</p>
+  <div *ngIf="!loading && voteHash">
+    <p>{{ voteHash }}</p>
+    <button mat-button color="primary" (click)="copyToClipboard(voteHash)">
+      Copiar al portapapeles
+    </button>
+    <button mat-button color="accent" [routerLink]="['/transparency']">
+      Transparencia
+    </button>
+  </div>
+  <p *ngIf="!loading && error">{{ error }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cerrar</button>
+</div>

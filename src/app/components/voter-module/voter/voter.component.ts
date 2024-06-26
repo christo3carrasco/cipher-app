@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { VotingDetailsComponent } from '../../voting-module/voting-details/voting-details.component';
 import { VoteComponent } from '../../vote-module/vote/vote.component';
 import { ResultsModalComponent } from '../../result-module/results-modal/results-modal.component';
+import { TransparencyModalComponent } from '../../transparency-module/transparency-modal/transparency-modal.component';
 
 @Component({
   selector: 'app-voter',
@@ -104,6 +105,14 @@ export class VoterComponent implements OnInit {
   openResultsDialog(voting: Voting): void {
     this.dialog.open(ResultsModalComponent, {
       width: '600px',
+      data: { votingId: voting._id },
+    });
+  }
+
+  openTransparencyDialog(voting: Voting): void {
+    this.dialog.open(TransparencyModalComponent, {
+      width: '650px',
+      height: '250px',
       data: { votingId: voting._id },
     });
   }

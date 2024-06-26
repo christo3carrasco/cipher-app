@@ -27,6 +27,8 @@ import { ParticipantListComponent } from './components/participant-module/partic
 import { ResultsModalComponent } from './components/result-module/results-modal/results-modal.component';
 import { VoteComponent } from './components/vote-module/vote/vote.component';
 import { ProfileComponent } from './components/user-module/profile/profile.component';
+import { TransparencyModalComponent } from './components/transparency-module/transparency-modal/transparency-modal.component';
+import { TransparencyComponent } from './components/transparency-module/transparency/transparency.component';
 
 registerLocaleData(localeEs);
 
@@ -47,6 +49,8 @@ registerLocaleData(localeEs);
     ResultsModalComponent,
     VoteComponent,
     ProfileComponent,
+    TransparencyModalComponent,
+    TransparencyComponent,
   ],
   imports: [
     BrowserModule,

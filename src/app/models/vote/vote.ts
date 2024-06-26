@@ -3,5 +3,6 @@ export interface Vote {
   voter: string;
   optionNumber: number;
   votingProcess: string;
+  transactionHash: string;
   timestamp: Date;
 }

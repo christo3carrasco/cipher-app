@@ -10,6 +10,13 @@
       >
       <a
         mat-list-item
+        routerLink="/transparency"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Transparencia</a
+      >
+      <a
+        mat-list-item
         routerLink="/voting"
         routerLinkActive="active-button"
         (click)="sidenav.close()"
@@ -46,6 +53,13 @@
           routerLink="/voter"
           routerLinkActive="active-button"
           >Votante</a
+        >
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/transparency"
+          routerLinkActive="active-button"
+          >Transparencia</a
         >
         <a
           mat-button
@@ -156,6 +170,14 @@
                 (click)="openResultsDialog(voting)"
               >
                 Resultados
+              </button>
+              <button
+                mat-button
+                color="accent"
+                *ngIf="voting.isStarted && voting.isFinished"
+                (click)="openTransparencyDialog(voting)"
+              >
+                Transparencia
               </button>
             </td>
           </ng-container>
