@@ -37,6 +37,10 @@
           </mat-error>
         </mat-form-field>
 
+        <mat-error *ngIf="authError" class="auth-error">
+          Por favor revise sus datos e intente nuevamente.
+        </mat-error>
+
         <button
           mat-raised-button
           color="primary"

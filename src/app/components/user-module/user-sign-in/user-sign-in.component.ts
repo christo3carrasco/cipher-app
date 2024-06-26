@@ -12,6 +12,7 @@ import { SignInData } from '../../../models/user/sign-in-data';
 })
 export class UserSignInComponent implements OnInit {
   signInForm!: FormGroup;
+  authError: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +40,7 @@ export class UserSignInComponent implements OnInit {
         },
         error: (error) => {
           console.error('Login failed', error);
+          this.authError = true;
         },
       });
     }
