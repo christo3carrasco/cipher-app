@@ -1,0 +1,179 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.app-toolbar {
+  background-color: #d32f2f; /* Rojo oscuro */
+  color: white;
+}
+
+.toolbar-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-button {
+  color: white !important; /* Color de texto blanco */
+  font-weight: bold;
+  background-color: transparent; /* Fondo transparente para los botones */
+  border: none; /* Sin borde para los botones */
+  font-size: 16px; /* Tamaño de fuente */
+  margin-right: 10px; /* Espaciado entre botones */
+  text-transform: none; /* Evita la transformación del texto a mayúsculas */
+}
+
+.toolbar-button:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Fondo claro al pasar el ratón */
+  color: white !important; /* Asegurando que el color del texto sigue siendo blanco */
+}
+
+.toolbar-button:focus,
+.toolbar-button:active {
+  color: white !important; /* Asegurando que el color del texto sigue siendo blanco cuando el botón está enfocado o activo */
+}
+
+.active-button {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Fondo más claro para el botón activo */
+  color: white !important; /* Asegurando que el color del texto sigue siendo blanco */
+}
+
+.voting-container {
+  margin: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #d32f2f; /* Rojo oscuro */
+  text-align: center; /* Centrando el título */
+}
+
+.actions-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.new-button {
+  margin-right: 20px;
+}
+
+.filter {
+  flex: 1;
+}
+
+.legend-container {
+  display: flex;
+  justify-content: center; /* Centrando la leyenda */
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Adaptar a dispositivos móviles */
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 10px; /* Espacio entre filas en dispositivos móviles */
+}
+
+.legend-item .status-circle {
+  margin-right: 8px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Habilitar desplazamiento horizontal */
+}
+
+.table-responsive table {
+  width: 100%;
+  min-width: 600px; /* Ajustar según sea necesario para la tabla */
+}
+
+.status-circle {
+  border-radius: 50%;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+.status-approved {
+  background-color: green;
+}
+
+.status-started {
+  background-color: yellow;
+}
+
+.status-finished {
+  background-color: red;
+}
+
+.status-default {
+  background-color: gray;
+}
+
+:host {
+  display: block;
+  height: 100vh;
+  background-color: #ffe4e1; /* Color de fondo */
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-raised-button.new-button {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.mat-raised-button.new-button:hover {
+  background-color: #b71c1c;
+}
+
+.mat-form-field.filter input {
+  background-color: #ffe4e1;
+}
+
+.voting-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+button {
+  margin-top: 10px;
+}

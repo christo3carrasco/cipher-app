@@ -29,6 +29,7 @@ import { VoteComponent } from './components/vote-module/vote/vote.component';
 import { ProfileComponent } from './components/user-module/profile/profile.component';
 import { TransparencyModalComponent } from './components/transparency-module/transparency-modal/transparency-modal.component';
 import { TransparencyComponent } from './components/transparency-module/transparency/transparency.component';
+import { TransparencyVoteComponent } from './components/transparency-module/transparency-vote/transparency-vote.component';
 
 registerLocaleData(localeEs);
 
@@ -51,6 +52,7 @@ registerLocaleData(localeEs);
     ProfileComponent,
     TransparencyModalComponent,
     TransparencyComponent,
+    TransparencyVoteComponent,
   ],
   imports: [
     BrowserModule,

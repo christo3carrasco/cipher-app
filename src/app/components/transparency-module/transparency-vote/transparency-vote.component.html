@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Detalles del Voto</h1>
+<div mat-dialog-content>
+  <p *ngIf="loading">Cargando...</p>
+  <div *ngIf="!loading && voteData">
+    <p><strong>Proceso de Votación:</strong> {{ voteData.votingName }}</p>
+    <p><strong>Nombre del Votante:</strong> {{ voteData.name }}</p>
+    <p><strong>Email del Votante:</strong> {{ voteData.email }}</p>
+    <p><strong>Opción Seleccionada:</strong> {{ voteData.optionName }}</p>
+    <p><strong>Hash del Voto:</strong> {{ voteData.hashVote }}</p>
+    <p><strong>Fecha y Hora:</strong> {{ voteData.timestamp }}</p>
+  </div>
+  <p *ngIf="!loading && error">{{ error }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cerrar</button>
+</div>

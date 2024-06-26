@@ -1,1 +1,96 @@
-<p>transparency works!</p>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav" mode="over">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/voter"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Votante</a
+      >
+      <a
+        mat-list-item
+        routerLink="/transparency"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Transparencia</a
+      >
+      <a
+        mat-list-item
+        routerLink="/voting"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Votaciones</a
+      >
+      <a
+        mat-list-item
+        routerLink="/profile"
+        routerLinkActive="active-button"
+        (click)="sidenav.close()"
+        >Perfil</a
+      >
+      <button mat-list-item (click)="logout(); sidenav.close()">
+        Cerrar Sesión
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="app-toolbar">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-title">Cipher Choice</span>
+      <span class="spacer"></span>
+      <ng-container *ngIf="!(isHandset$ | async)">
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/voter"
+          routerLinkActive="active-button"
+          >Votante</a
+        >
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/transparency"
+          routerLinkActive="active-button"
+          >Transparencia</a
+        >
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/voting"
+          routerLinkActive="active-button"
+          >Votaciones</a
+        >
+        <a
+          mat-button
+          class="toolbar-button"
+          routerLink="/profile"
+          routerLinkActive="active-button"
+          >Perfil</a
+        >
+        <button mat-button class="toolbar-button" (click)="logout()">
+          Cerrar Sesión
+        </button>
+      </ng-container>
+    </mat-toolbar>
+
+    <div class="voting-container">
+      <h1 class="page-title">Transparencia</h1>
+      <div class="input-container">
+        <mat-form-field>
+          <input matInput placeholder="Ingrese el hash" [(ngModel)]="hash" />
+        </mat-form-field>
+        <button mat-button color="primary" (click)="openVoteModal()">
+          Buscar
+        </button>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
