@@ -4,11 +4,18 @@
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Título</mat-label>
       <input matInput formControlName="title" required />
+      <mat-error *ngIf="votingForm.controls['title'].hasError('minlength')">
+        El título debe tener al menos 5 caracteres
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Descripción</mat-label>
       <textarea matInput formControlName="description" required></textarea>
+      <mat-error
+        *ngIf="votingForm.controls['description'].hasError('minlength')"
+        >La descripción debe tener al menos 5 caracteres
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">

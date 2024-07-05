@@ -25,7 +25,14 @@ export class OptionListComponent implements OnInit {
   ngOnInit(): void {
     this.isStarted = this.data.isStarted;
     this.optionForm = this.fb.group({
-      name: ['', [Validators.required, this.nameValidator.bind(this)]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          this.nameValidator.bind(this),
+        ],
+      ],
     });
     this.loadOptions();
     if (this.isStarted) {

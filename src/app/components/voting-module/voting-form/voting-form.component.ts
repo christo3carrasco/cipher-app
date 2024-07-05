@@ -23,12 +23,16 @@ export class VotingFormComponent implements OnInit {
 
   ngOnInit(): void {
     const today = new Date();
-    this.minStartDate = this.formatDate(today);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    this.minStartDate = this.formatDate(tomorrow);
     this.minEndDate = this.minStartDate;
 
     this.votingForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      description: ['', [Validators.required, Validators.minLength(5)]],
       startDate: [today, Validators.required],
       endDate: ['', Validators.required],
     });
@@ -37,6 +41,13 @@ export class VotingFormComponent implements OnInit {
       .get('startDate')
       ?.valueChanges.subscribe((startDate: Date) => {
         this.minEndDate = this.formatDate(startDate || new Date());
+        const endDateControl = this.votingForm.get('endDate');
+        if (
+          endDateControl?.value &&
+          new Date(endDateControl.value) < new Date(startDate)
+        ) {
+          endDateControl.setValue(null);
+        }
       });
   }
 
@@ -67,7 +78,9 @@ export class VotingFormComponent implements OnInit {
 
   onStartDateChange(event: any): void {
     const startDate = event.value;
-    this.minEndDate = this.formatDate(startDate || new Date());
+    const tomorrow = new Date(startDate);
+    tomorrow.setDate(startDate.getDate() + 1);
+    this.minEndDate = this.formatDate(tomorrow || new Date());
   }
 
   formatDate(date: Date): string {

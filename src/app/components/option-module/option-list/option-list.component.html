@@ -7,6 +7,9 @@
       <mat-error *ngIf="optionForm.get('name')?.hasError('required')"
         >El nombre es requerido</mat-error
       >
+      <mat-error *ngIf="optionForm.get('name')?.hasError('minlength')"
+        >El nombre debe tener al menos 5 caracteres</mat-error
+      >
       <mat-error *ngIf="optionForm.get('name')?.hasError('nameExists')"
         >El nombre ya existe</mat-error
       >
